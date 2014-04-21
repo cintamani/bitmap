@@ -1,6 +1,6 @@
 module Bitmap
   class Bitmap
-    attr_reader :map
+    attr_accessor :map
 
     def initialize(m, n)
       @map = n.times.map do
@@ -33,7 +33,66 @@ module Bitmap
         end
       end
     end
+
+    def colour_area(x, y, colour)
+      if x_in_map?(x) && y_in_map?(y)
+        override_colour = @map[x][y]
+        @map[x][y] = colour
+
+        colour_adjacent(x, y, override_colour, colour)
+      end
+    end
+
     private
+
+    def colour_adjacent(x, y, override_colour, colour)
+      adjacent_coordinates = get_adjacent_coordinates(x, y, override_colour)
+      adjacent_coordinates.each do |x, y|
+        @map[x][y] = colour
+        colour_adjacent(x, y, override_colour, colour)
+      end
+    end
+
+    def get_adjacent_coordinates(x, y, override_colour)
+      [
+        get_left(x, y, override_colour),
+        get_right(x, y, override_colour),
+        get_up(x, y, override_colour),
+        get_down(x, y, override_colour)
+      ].compact
+    end
+
+    def get_up(x, y, override_colour)
+      y += 1
+
+      if y_in_map?(y) && @map[x][y] == override_colour
+        [x, y]
+      end
+    end
+
+    def get_down(x, y, override_colour)
+      y -= 1
+
+      if y_in_map?(y) && @map[x][y] == override_colour
+        [x, y]
+      end
+    end
+
+    def get_right(x, y, override_colour)
+      x += 1
+
+      if x_in_map?(x) && @map[x][y] == override_colour
+        [x, y]
+      end
+    end
+
+    def get_left(x, y, override_colour)
+      x -= 1
+
+      if x_in_map?(x) && @map[x][y] == override_colour
+        [x, y]
+      end
+    end
 
     def in_map?(x, y)
       x_in_map?(x) && y_in_map?(y)

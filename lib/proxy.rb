@@ -16,6 +16,8 @@ class Proxy
       colour_vertical_segment(inputs) if bitmap
     when 'H'
       colour_horizontal_segment(inputs) if bitmap
+    when 'F'
+      colour_area(inputs) if bitmap
     end
   end
 
@@ -36,8 +38,8 @@ class Proxy
   attr_reader :bitmap
 
   def colour_pixel(inputs)
-    x, y, colour = *inputs
-    x, y = clean_coordinate(x), clean_coordinate(y)
+    y, x, colour = *inputs
+    y, x = clean_coordinate(y), clean_coordinate(x)
 
     bitmap.colour_pixel(x, y, colour)
   end
@@ -54,6 +56,13 @@ class Proxy
     y1, y2, x = clean_coordinate(y1), clean_coordinate(y2), clean_coordinate(x)
 
     bitmap.colour_horizontal_segment(y1, y2, x, colour)
+  end
+
+  def colour_area(inputs)
+    y, x, colour = *inputs
+    y, x = clean_coordinate(y), clean_coordinate(x)
+
+    bitmap.colour_area(x, y, colour)
   end
 
   def set_matrix_size(inputs)

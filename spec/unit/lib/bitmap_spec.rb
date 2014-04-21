@@ -14,6 +14,34 @@ describe Bitmap::Bitmap do
     end
   end
 
+  describe '#colour_area' do
+    let(:m) { 3 }
+    let(:n) { 5 }
+
+    let(:map) { [
+      [0, 0, 0],
+      ['A', 'A', 'A'],
+      ['B', 'B', 'B'],
+      ['B', 'B', 'B'],
+      ['B', 'B', 'B']
+    ]}
+
+    before do
+      subject.map = [
+        [0, 0, 0],
+        ['A', 'A', 'A'],
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]]
+    end
+
+    it "colour an area" do
+      subject.colour_area(3, 2, 'B')
+
+      expect(subject.map).to eq(map)
+    end
+  end
+
   describe '#colour_pixel' do
     let(:m) { 2 }
     let(:n) { 2 }

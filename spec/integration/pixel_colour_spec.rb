@@ -17,4 +17,8 @@ describe 'Pixel Colour' do
   it "colour an horizontal segment" do
     assert_horizontal_segmanet_coloured
   end
+
+  it "colour an area" do
+    assert_area_coloured
+  end
 end

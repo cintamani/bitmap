@@ -1,18 +1,19 @@
 require 'open3'
 
 ## Generate:
-## => A0000
-## => 00ZZ0
-## => 0W000
-## => 0W000
-## => 0W000
-## => 0W000
+## => 0A000
+## => 00ZZZ
+## => 0WTTT
+## => 0WTTT
+## => 0WTTT
+## => 0WTTT
 def create_coloured_image
   exec %Q{
     I 5 6
-    L 1 1 A
+    L 2 1 A
     V 2 3 6 W
-    H 3 4 2 Z
+    H 3 5 2 Z
+    F 4 4 T
     S
     X
   }
@@ -27,6 +28,10 @@ def assert_vertical_segment_coloured
 end
 
 def assert_horizontal_segmanet_coloured
+  assert_coloured_image
+end
+
+def assert_area_coloured
   assert_coloured_image
 end
 
@@ -55,5 +60,5 @@ def exec(stin)
 end
 
 def assert_coloured_image
-  expect(@output).to include(p"A0000\n00ZZ0\n0W000\n0W000\n0W000\n0W000")
+  expect(@output).to include(p"0A000\n00ZZZ\n0WTTT\n0WTTT\n0WTTT\n0WTTT")
 end

@@ -19,13 +19,19 @@ describe Proxy do
 
     it 'colour pixel' do
       expect(bitmap).to receive(:colour_pixel).with(0, 1, 'C')
-      subject.process_input(['L', '1', '2', 'C'])
+      subject.process_input(['L', '2', '1', 'C'])
     end
 
     it "colour vertical segment" do
       expect(bitmap).to receive(:colour_vertical_segment).with(0, 1, 2, 'C')
 
       subject.process_input(['V', '1', '2', '3', 'C'])
+    end
+
+    it "colour area" do
+      expect(bitmap).to receive(:colour_area).with(1, 0, 'C')
+
+      subject.process_input(['F', '1', '2', 'C'])
     end
 
     it "colour horizontal segment" do
