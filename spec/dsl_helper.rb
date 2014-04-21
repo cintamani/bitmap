@@ -6,12 +6,12 @@ require 'open3'
 ## => 0W000
 ## => 0W000
 ## => 0W000
-## => 00000
+## => 0W000
 def create_coloured_image
   exec %Q{
     I 5 6
     L 1 1 A
-    V 2 3 5 W
+    V 2 3 6 W
     H 3 4 2 Z
     S
     X
@@ -55,5 +55,5 @@ def exec(stin)
 end
 
 def assert_coloured_image
-  expect(@output).to include(p"A0000\n00ZZ0\n0W000\n0W000\n0W000\n00000")
+  expect(@output).to include(p"A0000\n00ZZ0\n0W000\n0W000\n0W000\n0W000")
 end

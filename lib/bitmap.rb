@@ -40,11 +40,11 @@ module Bitmap
     end
 
     def x_in_map?(x)
-      0 <= x && x < @map.first.size
+      0 <= x && x < @map.size
     end
 
     def y_in_map?(y)
-      0 <= y && y < @map.size
+      0 <= y && y < @map.first.size
     end
   end
 end
