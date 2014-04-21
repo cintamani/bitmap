@@ -14,6 +14,23 @@ describe Bitmap::Bitmap do
     end
   end
 
+  describe '#clean' do
+    let(:m) { 2 }
+    let(:n) { 2 }
+
+    let(:map) { [[0, 0], [0, 0]] }
+
+    before do
+      subject.map = [['A', 'B'], ['C', 'D']]
+    end
+
+    it 'clean the area' do
+      subject.clean
+
+      expect(subject.map).to eq(map)
+    end
+  end
+
   describe '#colour_area' do
     let(:m) { 3 }
     let(:n) { 5 }

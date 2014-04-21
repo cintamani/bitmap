@@ -28,6 +28,12 @@ describe Proxy do
       subject.process_input(['V', '1', '2', '3', 'C'])
     end
 
+    it 'clear the map' do
+      expect(bitmap).to receive(:clean)
+
+      subject.process_input(['C'])
+    end
+
     it "colour area" do
       expect(bitmap).to receive(:colour_area).with(1, 0, 'C')
 

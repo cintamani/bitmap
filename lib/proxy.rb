@@ -18,6 +18,8 @@ class Proxy
       colour_horizontal_segment(inputs) if bitmap
     when 'F'
       colour_area(inputs) if bitmap
+    when 'C'
+      bitmap.clean if bitmap
     end
   end
 

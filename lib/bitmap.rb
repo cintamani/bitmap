@@ -3,6 +3,8 @@ module Bitmap
     attr_accessor :map
 
     def initialize(m, n)
+      @m, @n = m, n
+
       @map = n.times.map do
         m.times.map { 0 }
       end
@@ -12,6 +14,12 @@ module Bitmap
       @map.map do |row|
         row.join
       end.join("\n")
+    end
+
+    def clean
+      @map = @n.times.map do
+        @m.times.map { 0 }
+      end
     end
 
     def colour_pixel(x, y, colour)

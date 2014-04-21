@@ -19,6 +19,20 @@ def create_coloured_image
   }
 end
 
+def create_coloured_image_and_clean_map
+  exec %Q{
+    I 5 6
+    L 2 1 A
+    V 2 3 6 W
+    H 3 5 2 Z
+    F 4 4 T
+    S
+    C
+    S
+    X
+  }
+end
+
 def assert_one_pixel_coloured
   assert_coloured_image
 end
@@ -44,15 +58,15 @@ def create_image(x, y)
 end
 
 def assert_2_x_3_image
-  expect(@output).to include("00\n00\n00")
+  expect(@output).to eq("00\n00\n00\n")
 end
 
 def assert_no_error_message_displayed
-  expect(@output).to_not include("Please use numbers between 0 and 251 only.")
+  expect(@output).to_not eq("Please use numbers between 0 and 251 only.\n\n")
 end
 
 def assert_error_message_displayed
-  expect(@output).to include("Please use numbers between 0 and 251 only.")
+  expect(@output).to eq("Please use numbers between 0 and 251 only.\n\n")
 end
 
 def exec(stin)
@@ -60,5 +74,9 @@ def exec(stin)
 end
 
 def assert_coloured_image
-  expect(@output).to include(p"0A000\n00ZZZ\n0WTTT\n0WTTT\n0WTTT\n0WTTT")
+  expect(@output).to eq("0A000\n00ZZZ\n0WTTT\n0WTTT\n0WTTT\n0WTTT\n")
+end
+
+def assert_cleaded_area_after_coloured_image
+  expect(@output).to eq("0A000\n00ZZZ\n0WTTT\n0WTTT\n0WTTT\n0WTTT\n00000\n00000\n00000\n00000\n00000\n00000\n")
 end
