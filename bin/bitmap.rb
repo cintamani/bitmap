@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/bitmap'
+require_relative '../lib/proxy'
 
-proxy = Bitmap::Proxy.new
+proxy = Proxy.new
 
 loop do
   begin
